@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutas y Navegación SPA</title>
+<style>
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+color:white;
+}
+header{
+text-align:center;
+padding:30px;
+font-size:28px;
+font-weight:bold;
+letter-spacing:1px;
+}
+nav{
+display:flex;
+justify-content:center;
+gap:20px;
+padding:15px;
+background:rgba(0,0,0,0.3);
+backdrop-filter: blur(6px);
+position:sticky;
+top:0;
+}
+nav a{
+text-decoration:none;
+color:white;
+padding:10px 18px;
+border-radius:20px;
+transition:0.3s;
+font-weight:bold;
+}
+nav a:hover{
+background:#00c6ff;
+color:black;
+}
+.container{
+max-width:1000px;
+margin:auto;
+padding:40px;
+animation:fade 0.5s;
+}
+.card{
+background:rgba(255,255,255,0.08);
+padding:25px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+h2{
+color:#00e5ff;
+}
+ul{
+line-height:1.8;
+}
+.code{
+background:black;
+padding:15px;
+border-radius:10px;
+font-family:monospace;
+color:#00ff9c;
+overflow:auto;
+}
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
+footer{
+text-align:center;
+padding:20px;
+opacity:0.7;
+}
+</style>
+</head>
+<body>
+
+<header>
+Rutas (Router) y Navegación en SPA
+</header>
+
+<nav>
+<a href="#inicio">Inicio</a>
+<a href="#spa">¿Qué es una SPA?</a>
+<a href="#router">¿Qué es Router?</a>
+<a href="#funciona">Cómo funciona</a>
+<a href="#ventajas">Ventajas</a>
+</nav>
+
+<div id="app" class="container"></div>
+
+<footer>
+Presentación Web - Desarrollo Web
+</footer>
+
+<script>
+const routes = {
+
+inicio: `
+<div class="card">
+<h2>Introducción</h2>
+<p>Las aplicaciones web modernas utilizan navegación dinámica para mejorar la experiencia del usuario. En lugar de recargar toda la página cada vez que el usuario navega, las aplicaciones SPA utilizan rutas internas que cambian el contenido de la página de forma dinámica.</p>
+</div>
+
+<div class="card">
+<h2>¿Qué aprenderás?</h2>
+<ul>
+<li>Qué es una SPA (Single Page Application)</li>
+<li>Qué es un Router</li>
+<li>Cómo funciona la navegación interna</li>
+<li>Ventajas de usar SPA</li>
+</ul>
+</div>
+`,
+
+spa:`
+<div class="card">
+<h2>¿Qué es una SPA?</h2>
+<p>SPA significa <b>Single Page Application</b>. Es un tipo de aplicación web que carga una sola página HTML y luego actualiza dinámicamente el contenido sin recargar completamente la página.</p>
+
+<ul>
+<li>El contenido cambia dinámicamente con JavaScript</li>
+<li>No hay recargas completas del navegador</li>
+<li>La experiencia es más rápida y fluida</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Ejemplos de SPA</h2>
+<ul>
+<li>Gmail</li>
+<li>Facebook</li>
+<li>Twitter</li>
+<li>Netflix</li>
+</ul>
+</div>
+`,
+
+router:`
+<div class="card">
+<h2>¿Qué es un Router?</h2>
+<p>Un Router es el sistema que se encarga de gestionar las rutas dentro de una SPA. Permite cambiar el contenido mostrado en la página dependiendo de la URL o del estado de navegación.</p>
+
+<ul>
+<li>Detecta cambios en la URL</li>
+<li>Muestra diferentes vistas</li>
+<li>No recarga toda la página</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Ejemplo de ruta</h2>
+<div class="code">
+/home
+/about
+/contact
+</div>
+</div>
+`,
+
+funciona:`
+<div class="card">
+<h2>¿Cómo funciona un Router?</h2>
+<ol>
+<li>El usuario hace clic en un enlace</li>
+<li>La URL cambia</li>
+<li>JavaScript detecta el cambio</li>
+<li>Se renderiza el contenido correspondiente</li>
+</ol>
+</div>
+
+<div class="card">
+<h2>Ejemplo básico en JavaScript</h2>
+<div class="code">
+window.addEventListener('hashchange', router);
+
+function router(){
+ const route = location.hash.replace('#','');
+ document.getElementById('app').innerHTML = routes[route];
+}
+</div>
+</div>
+`,
+
+ventajas:`
+<div class="card">
+<h2>Ventajas de usar SPA</h2>
+<ul>
+<li>Mayor velocidad de navegación</li>
+<li>Mejor experiencia de usuario</li>
+<li>Menos carga en el servidor</li>
+<li>Interacciones más fluidas</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Tecnologías que usan Router</h2>
+<ul>
+<li>React Router</li>
+<li>Vue Router</li>
+<li>Angular Router</li>
+</ul>
+</div>
+`
+};
+
+function router(){
+const hash = location.hash.replace('#','') || 'inicio';
+document.getElementById('app').innerHTML = routes[hash];
+}
+
+window.addEventListener('hashchange', router);
+window.addEventListener('load', router);
+</script>
+
+</body>
+</html>
